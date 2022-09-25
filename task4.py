@@ -1,26 +1,23 @@
-
 import argparse
 
-def optimal_weight(W, w):
 
-    bars = [0] + w
-    print(bars)
+def optimal_weight(W, w):
+    golds = [0] + w
     gold_dict = {}
     for i in range(0, W+1):
-        gold_dict[(i, bars[0])] = 0
-    for i in bars:
+        gold_dict[(i, golds[0])] = 0
+    for i in golds:
         gold_dict[(0, i)] = 0
-    # print(gold_dict)
-    for i in range(1, len(bars)):
-        for weight in range(1, W+1):
-            gold_dict[(weight, bars[i])] = gold_dict[(weight, bars[i-1])]
-            if bars[i] <= weight:
-                val = gold_dict[(weight-bars[i], bars[i-1])] + bars[i]
-                if gold_dict[(weight, bars[i])] < val:
-                    gold_dict[(weight, bars[i])] = val
-    # print(gold_dict)
-    return max(gold_dict.values())
 
+    for i in range(1, len(golds)):
+        for weight in range(1, W+1):
+            gold_dict[(weight, golds[i])] = gold_dict[(weight, golds[i-1])]
+            if golds[i] <= weight:
+                val = gold_dict[(weight-golds[i], golds[i-1])] + golds[i]
+                if gold_dict[(weight, golds[i])] < val:
+                    gold_dict[(weight, golds[i])] = val
+
+    return max(gold_dict.values())
 
 
 parser = argparse.ArgumentParser()

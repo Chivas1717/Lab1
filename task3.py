@@ -3,16 +3,21 @@ import argparse
 parser = argparse.ArgumentParser(description="calculator")
 parser.add_argument('userInput', nargs='?', type=str, help="type your input")
 args = parser.parse_args()
-userInput = args.userInput
-result = None
-if not userInput:
-    print('False', result)
-else:
-    if "++" in userInput or "--" in userInput:
-        print('False', result)
+
+
+def correct_formula(userInput):
+    result = None
+    if userInput:
+        if "++" in userInput or "--" in userInput:
+            return 'False', result
+        else:
+            try:
+                result = eval(userInput)
+                return 'True', result
+            except:
+                return 'False', result
     else:
-        try:
-            result = eval(userInput)
-            print('True', result)
-        except:
-            print('False', result)
+        return 'False', result
+
+
+print(correct_formula(args.userInput))

@@ -3,21 +3,21 @@ import argparse
 import operator as operators
 
 parser = argparse.ArgumentParser(description="calculator")
-parser.add_argument('operator',  type=str, help="enter your operator")
-parser.add_argument('firstNumber',  type=int, help="enter first number")
-parser.add_argument('secondNumber', type=int, nargs="?", help="enter second number")
+parser.add_argument('operator', help="enter your operator")
+parser.add_argument('numbers', nargs="+",  type=int, help="enter first number")
+
 args = parser.parse_args()
 
-a = args.firstNumber
-b = args.secondNumber
-operator = args.operator
 
-try:
-    operator = getattr(operators, operator)
-    print(operator(a, b))
-except AttributeError:
+def math_function(numbers, operator):
     try:
+        operator = getattr(operators, operator)
+        if operator:
+            return operator(*numbers)
         operator = getattr(math, operator)
-        print(operator(a, b))
+        return operator(*numbers)
     except AttributeError:
-        print("Try another function")
+        return "Try another function"
+
+
+print(math_function(args.numbers, args.operator))
