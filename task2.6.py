@@ -1,4 +1,4 @@
-class Node:
+class BinaryTree:
     def __init__(self, code, price):
 
         self.left = None
@@ -11,12 +11,12 @@ class Node:
         if self.code:
             if code < self.code:
                 if self.left is None:
-                    self.left = Node(code, price)
+                    self.left = BinaryTree(code, price)
                 else:
                     self.left.insert(code, price)
             elif code > self.code:
                 if self.right is None:
-                    self.right = Node(code, price)
+                    self.right = BinaryTree(code, price)
                 else:
                     self.right.insert(code, price)
         else:
@@ -25,9 +25,9 @@ class Node:
 
     def find_product(self, code, quantity):
         if not isinstance(code, int):
-            print("Wrong product code")
+            print("Wrong product code. Should be type int")
         if not isinstance(quantity, int):
-            print("Wrong quantity")
+            print("Wrong quantity. Should be type int")
         if self.code == code:
             return quantity * self.price
         if self.left:
@@ -36,7 +36,7 @@ class Node:
         if self.right:
             if self.code < code:
                 return self.right.find_product(code, quantity)
-        print("Not founded an product code")
+        print("product code not found")
 
     def printTree(self):
         if self.left:
@@ -46,7 +46,7 @@ class Node:
             self.right.printTree()
 
 
-root = Node(27, 5)
+root = BinaryTree(27, 5)
 root.insert(14, 7)
 root.insert(35, 10)
 root.insert(31, 3)
