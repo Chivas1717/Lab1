@@ -1,6 +1,9 @@
 class BinaryTree:
     def __init__(self, code, price):
-
+        if not isinstance(code, int):
+            raise TypeError("Wrong product code")
+        if not isinstance(price, int):
+            raise TypeError("Wrong price")
         self.left = None
         self.right = None
         self.code = code
@@ -25,9 +28,9 @@ class BinaryTree:
 
     def find_product(self, code, quantity):
         if not isinstance(code, int):
-            print("Wrong product code. Should be type int")
+            raise TypeError("Wrong product code")
         if not isinstance(quantity, int):
-            print("Wrong quantity. Should be type int")
+            raise TypeError("Wrong quantity")
         if self.code == code:
             return quantity * self.price
         if self.left:
@@ -36,7 +39,7 @@ class BinaryTree:
         if self.right:
             if self.code < code:
                 return self.right.find_product(code, quantity)
-        print("product code not found")
+        raise ValueError("Product code not found")
 
     def printTree(self):
         if self.left:
