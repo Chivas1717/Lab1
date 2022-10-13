@@ -20,7 +20,7 @@ class Rational:
 
     def float_form(self):
         if self._num / self._denom == 1:
-            print(1)
+            return 1
         else:
             return self._num / self._denom
 
